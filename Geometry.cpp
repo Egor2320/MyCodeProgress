@@ -478,7 +478,3 @@ public:
     ~triangle() = default;
 
 };
-
-int main(){
-    return 0;
-}
