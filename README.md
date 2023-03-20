@@ -1,7 +1,7 @@
 # MyCodeProgress
 Just a place where I store projects I do on my my way to becoming a better programmer) 
 ###
-#What can you find here:
+What can you find here:
 
 1)BigInt (C++)
 
