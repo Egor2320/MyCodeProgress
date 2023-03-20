@@ -73,7 +73,3 @@ private:
     size_t buff_size;
     std::vector<bucket>buck;
 };
-
-int main(){
-    return 0;
-}
