@@ -16,3 +16,7 @@ What can you find here:
 6) Game "Funny Birds" (Java)
 
 7) Class "Permutation" (C++)
+
+8) Binary tree (C)
+
+9) Calculator that cares about the priorities (smart calculator) (C)
