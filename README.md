@@ -14,3 +14,5 @@ What can you find here:
 5)Bucket Allocator(C++)
 
 6)Game "Funny Birds" (Java)
+
+7) Class "Permutation" (C++)
