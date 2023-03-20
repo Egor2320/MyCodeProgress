@@ -205,7 +205,3 @@ public:
         return cube[side];
     }
 };
-
-int main(){
-    return 0;
-}
