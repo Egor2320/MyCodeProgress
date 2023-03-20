@@ -5,7 +5,7 @@ What can you find here:
 
 1)BigInt (C++)
 
-2)Geometry Hierachy(C++)
+2)Geometry Hiearachy(C++)
 
 3)Rubick's Cube (C++)
 
