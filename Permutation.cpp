@@ -203,6 +203,3 @@ permutation<n> operator * (const permutation<n> &a, const permutation<n> &b){
     permutation tmp = permutation(a);
     return tmp *= b;
 }
-int main(){
-    return 0;
-}
