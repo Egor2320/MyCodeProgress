@@ -43,7 +43,3 @@ public:
 private:
     vt *ptr;
 };
-
-int main(){
-    return 0;
-}
