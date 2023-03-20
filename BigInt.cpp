@@ -445,7 +445,3 @@ bigint operator * (const int &b, const bigint &a){
     bigint tmp1 = bigint(a);
     return tmp1*=tmp;
 }
-
-int main(){
-    return 0;
-}
