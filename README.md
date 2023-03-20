@@ -1,5 +1,5 @@
 # MyCodeProgress
-Just a place where I store projects I do on my my way to becoming a better programmer) 
+Just a place where I store projects I do on my way to becoming a better programmer) 
 ###
 What can you find here:
 
