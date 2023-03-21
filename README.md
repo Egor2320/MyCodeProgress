@@ -20,3 +20,5 @@ What can you find here:
 8) Binary tree (C)
 
 9) Calculator that cares about the priorities (smart calculator) (C)
+
+10) Xor list (unfinished, some constructors, merge and erase are not implemented yet) (C++)
