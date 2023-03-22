@@ -40,9 +40,30 @@ public:
         }
     }
 
-    XorList(const XorList &other); // TODO
-    XorList(XorList &&other); // TODO
+    XorList(const XorList &other){
+        if(!empty()) {
+            Node<T> *tmp = other.getFirst();
+            Node<T> *prev = other.getFirst();
+            insert_back(tmp->val);
+            tmp = tmp->pointer;
+            while (tmp != nullptr && tmp != other.getLast()) {
+                insert_back(tmp->val);
+                Node<T> *cur = tmp;
+                tmp = reinterpret_cast<Node<T> *>
+                ((reinterpret_cast<unsigned long long>(prev) ^ reinterpret_cast<unsigned long long>((tmp->pointer))));
+                prev = cur;
+            }
+            if(tmp!= nullptr)
+                insert_back(tmp->val);
+        }
 
+    }
+    
+    XorList(XorList &&other){
+        first = other.first;
+        last = other.last;
+    }
+    
     XorList& operator=(const XorList &other); // TODO
     XorList& operator=(XorList &&other); // TODO
 
