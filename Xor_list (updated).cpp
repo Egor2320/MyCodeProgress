@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<new>
 #include<utility>
@@ -27,6 +28,7 @@ public:
             Node<T> *prev = first;
             Node<T> *cur = tmp;
             tmp = tmp->pointer;
+            (cur->val).~T();
             operator delete(cur, std::nothrow);
 
             while (tmp != nullptr && tmp != last) {
@@ -34,9 +36,13 @@ public:
                 tmp = reinterpret_cast<Node<T> *>
                 ((reinterpret_cast<unsigned long long>(prev) ^ reinterpret_cast<unsigned long long>((tmp->pointer))));
                 prev = cur;
+                (cur->val).~T();
                 operator delete(cur, std::nothrow);
             }
-            operator delete(tmp, std::nothrow);
+            if (tmp != nullptr) {
+                (cur->val).~T();
+                operator delete(tmp, std::nothrow);
+            }
         }
     }
 
@@ -60,13 +66,12 @@ public:
         }
 
     }
-    
     XorList(XorList &&other){
         first = other.first;
         last = other.last;
         other.last = other.first = nullptr;
     }
-    
+
     XorList& operator=(const XorList &other); // TODO
     XorList& operator=(XorList &&other); // TODO
 
@@ -80,7 +85,7 @@ public:
             new_last->val = node_value;
             new_last->pointer = last;
             last->pointer = reinterpret_cast<Node<T>*>
-                    ((reinterpret_cast<unsigned long long>(new_last) ^ reinterpret_cast<unsigned long long>(last->pointer)));
+            ((reinterpret_cast<unsigned long long>(new_last) ^ reinterpret_cast<unsigned long long>(last->pointer)));
             last = new_last;
         }
 
@@ -100,7 +105,7 @@ public:
             new_first->val = node_value;
             new_first->pointer = first;
             first->pointer = reinterpret_cast<Node<T> *>
-                    ((reinterpret_cast<unsigned long long>(new_first) ^ reinterpret_cast<unsigned long long>(first->pointer)));
+            ((reinterpret_cast<unsigned long long>(new_first) ^ reinterpret_cast<unsigned long long>(first->pointer)));
             first = new_first;
         }
         return *this;
@@ -122,7 +127,7 @@ public:
         }
         else{
             Node<T> *cur = reinterpret_cast<Node<T>*>
-                    (reinterpret_cast<unsigned long long>(last) ^ reinterpret_cast<unsigned long long>((last->pointer)->pointer));
+            (reinterpret_cast<unsigned long long>(last) ^ reinterpret_cast<unsigned long long>((last->pointer)->pointer));
             Node<T>* tmp = last;
             last = last->pointer;
             last->pointer = cur;
@@ -158,8 +163,23 @@ public:
         return *this;
     }
 
-    XorList& merge(const XorList& other); // TODO
-    XorList& merge(XorList&& other); // TODO
+    XorList& merge(const XorList& other){
+        if(other.empty()) return *this;
+        XorList<T> list = XorList<T>(other);
+        merge(std::move(list));
+        return *this;
+    }
+
+    XorList& merge(XorList&& other){
+        if(other.empty()) return *this;
+        (other.first)->pointer = reinterpret_cast<Node<T>*>
+                (reinterpret_cast<unsigned long long> (last) ^ reinterpret_cast<unsigned long long>(other.first->pointer));
+        last->pointer = reinterpret_cast<Node<T>*>
+                (reinterpret_cast<unsigned long long> (last->pointer) ^ reinterpret_cast<unsigned long long>(other.first));
+        last = other.last;
+        other.last = other.first = nullptr;
+        return *this;
+    }
 
     bool empty()const{
         if (first == nullptr) return true;
@@ -203,18 +223,18 @@ std::ostream& operator<<(std::ostream& out, const XorList<T>& xor_list){
 
 int main(){
     XorList<int> list = XorList<int>();
+    XorList<int> list1 = XorList<int>();
+
     list.insert_front(12);
     list.insert_front(13);
     list.insert_front(14);
     list.insert_front(15);
-    std::cout<<list << std::endl;
-    list.erase_front();
-    std::cout<<list << std::endl;
-    list.erase_front();
-    std::cout<<list << std::endl;
-    list.erase_front();
-    std::cout<<list << std::endl;
-    list.erase_front();
-    std::cout<<list << std::endl;
+
+    list1.insert_front(16);
+
+
+
+    list.merge(list1);
+    std::cout<< list << std::endl;
     return 0;
 }
