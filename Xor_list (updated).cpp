@@ -41,7 +41,9 @@ public:
     }
 
     XorList(const XorList &other){
-        if(!empty()) {
+        first = nullptr;
+        last = nullptr;
+        if(!other.empty()) {
             Node<T> *tmp = other.getFirst();
             Node<T> *prev = other.getFirst();
             insert_back(tmp->val);
@@ -62,6 +64,7 @@ public:
     XorList(XorList &&other){
         first = other.first;
         last = other.last;
+        other.last = other.first = nullptr;
     }
     
     XorList& operator=(const XorList &other); // TODO
