@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include<new>
 #include<utility>
@@ -72,8 +71,22 @@ public:
         other.last = other.first = nullptr;
     }
 
-    XorList& operator=(const XorList &other); // TODO
-    XorList& operator=(XorList &&other); // TODO
+    XorList& operator=(const XorList &other){
+        if(other.first != first && other.last != last) {
+            XorList<T> new_list = XorList<T>(other);
+            operator=(std::move(new_list));
+        }
+        return *this;
+    }
+    XorList& operator=(XorList &&other)noexcept{
+        if(other.first != first && other.last != last) {
+            (*this).~XorList();
+            first = other.first;
+            last = other.last;
+            other.first = other.last = nullptr;
+        }
+        return *this;
+    }
 
     XorList& insert_back(const T& node_value){
         if (empty()){
@@ -173,9 +186,9 @@ public:
     XorList& merge(XorList&& other){
         if(other.empty()) return *this;
         (other.first)->pointer = reinterpret_cast<Node<T>*>
-                (reinterpret_cast<unsigned long long> (last) ^ reinterpret_cast<unsigned long long>(other.first->pointer));
+        (reinterpret_cast<unsigned long long> (last) ^ reinterpret_cast<unsigned long long>(other.first->pointer));
         last->pointer = reinterpret_cast<Node<T>*>
-                (reinterpret_cast<unsigned long long> (last->pointer) ^ reinterpret_cast<unsigned long long>(other.first));
+        (reinterpret_cast<unsigned long long> (last->pointer) ^ reinterpret_cast<unsigned long long>(other.first));
         last = other.last;
         other.last = other.first = nullptr;
         return *this;
@@ -197,8 +210,6 @@ public:
 private:
     Node<T>* first;
     Node<T>* last;
-
-
 };
 
 template<typename T>
@@ -224,17 +235,11 @@ std::ostream& operator<<(std::ostream& out, const XorList<T>& xor_list){
 int main(){
     XorList<int> list = XorList<int>();
     XorList<int> list1 = XorList<int>();
-
     list.insert_front(12);
     list.insert_front(13);
     list.insert_front(14);
     list.insert_front(15);
-
-    list1.insert_front(16);
-
-
-
-    list.merge(list1);
+    list = list;
     std::cout<< list << std::endl;
     return 0;
 }
