@@ -11,6 +11,7 @@ namespace Reed_Muller {
         ~logical_function();
 
         int operator()(std::vector<int> vars);
+        int operator()(std::string);
 
         void print();
 
