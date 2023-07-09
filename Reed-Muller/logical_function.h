@@ -12,6 +12,8 @@ namespace Reed_Muller {
 
         int operator()(std::vector<int> vars);
 
+        void print();
+
     private:
         //each cell represents the coef * (var_1 & var_2 & ... & var_n), coef is either 0 or 1;
         // variables string looks like "a1 a2 ... an", the delimiter is single space;
