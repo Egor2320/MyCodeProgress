@@ -12,10 +12,13 @@ namespace Reed_Muller{
         int len = truth_table.size();
         func[0].coef = truth_table[0] - '0';
         for (int i = 1; i < len; ++i){
-            func[i].variables = p(i);
-            /*for (int j = 0; j < i; ++j){
-
-            }*/
+            std::vector<int> tmp = p(i);
+            func[i].variables = tmp;
+            int cur_num_of_var = tmp.size();
+            for(int k = 0; k < cur_num_of_var; ++k){
+                
+            }
+       
         }
     }
 
