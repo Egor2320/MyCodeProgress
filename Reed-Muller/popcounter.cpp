@@ -1,4 +1,5 @@
 #include "popcounter.h"
+#include <algorithm>
 namespace Reed_Muller{
 
     popcounter::popcounter() = default;
@@ -17,6 +18,31 @@ namespace Reed_Muller{
             ++count;
             a = a >> 1;
         }
+        return res;
+    }
+
+    std::string popcounter::to2(int a, int padding) {
+        if(!a){
+            int size = 0;
+            std::string ans;
+            while(size < padding){
+                ans+='0';
+                ++size;
+            }
+            return ans;
+        }
+        std::string res;
+        int size = 0;
+        while(a != 0){
+            res += std::to_string(a % 2);
+            a /= 2;
+            ++size;
+        }
+        while(size < padding){
+            res += '0';
+            ++size;
+        }
+        std::reverse(res.begin(), res.end());
         return res;
     }
 
