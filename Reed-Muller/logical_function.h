@@ -20,7 +20,7 @@ namespace Reed_Muller {
             int coef;
             std::vector<int> variables;
         };
-        int n;
+        int num;
         std::vector<cell> func;
     };
 }
