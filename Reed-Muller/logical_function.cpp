@@ -1,6 +1,8 @@
 #include "logical_function.h"
 #include "popcounter.h"
 #include <cmath>
+#include <algorithm>
+
 namespace Reed_Muller{
     logical_function::logical_function(int n, std::string truth_table) {
         popcounter p;
@@ -42,6 +44,29 @@ namespace Reed_Muller{
             }
             std::cout << '\n';
         }
+    }
+
+    int logical_function::operator()(std::vector<int> v) {
+        std::reverse(v.begin(), v.end());
+        int res = 0;
+        for(int i = 0; i < func.size(); ++i){
+            int carry = 1;
+            for(int j = 0; j < func[i].variables.size(); ++j){
+                carry &= v[func[i].variables[j]];
+            }
+            carry &= func[i].coef;
+            res ^= carry;
+        }
+        return res;
+    }
+
+    int logical_function::operator()(std::string s) {
+        std::vector<int> v;
+        int len = s.size();
+        for(int i = 0; i < len; ++i){
+            v.push_back(s[i] - '0');
+        }
+        return logical_function::operator()(v);
     }
 
 }
