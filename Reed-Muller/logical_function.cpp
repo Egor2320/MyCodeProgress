@@ -8,6 +8,8 @@
 namespace Reed_Muller{
     logical_function::logical_function(int n, std::string truth_table) {
         popcounter p;
+        
+        num = n;
         func.resize(n);
         int len = truth_table.size();
         func[0].coef = truth_table[0] - '0';
