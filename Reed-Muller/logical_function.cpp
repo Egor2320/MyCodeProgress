@@ -18,14 +18,14 @@ namespace Reed_Muller{
             int cur_coef = (truth_table[i] - '0');
             for(int k = 0; k < pow(2, cur_num_of_var); ++k){
                 std::string s = p.to2(k, cur_num_of_var);
-                //std::cout << "debug (double) " << s << '\n';
+                
                 int pos = 0;
                 for (int j = 0; j < s.size(); ++j){
                     if(s[j] == '1'){
                         pos += (1 << (tmp[j]));
                     }
                 }
-                //std::cout << "debug " << pos << '\n';
+                
                 cur_coef ^= func[pos].coef;
             }
             func[i].coef = cur_coef;
@@ -50,6 +50,7 @@ namespace Reed_Muller{
         std::reverse(v.begin(), v.end());
         int res = 0;
         for(int i = 0; i < func.size(); ++i){
+            if(func[i].coef == 0) continue;
             int carry = 1;
             for(int j = 0; j < func[i].variables.size(); ++j){
                 carry &= v[func[i].variables[j]];
