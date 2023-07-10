@@ -12,7 +12,7 @@ int main() {
     }
 
 
-    f.print();
+    f.polynomical();
 
 
     return 0;
