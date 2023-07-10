@@ -20,15 +20,13 @@ namespace Reed_Muller {
   public:
 		
     logical_function(int n, std::string truth_table);
-		logical_function(int n, const kitty::dynamic_truth_table& t);
+    logical_function(int n, const kitty::dynamic_truth_table& t);
 		
-		static std::vector<cell> sythesize(kitty::dynamic_truth_table t);
-		static uint64_t apply(kitty:: dynamic_truth_table t);
 
     ~logical_function();
 
 		
-		uint64_t operator()(const kitty::dynamic_truth_table& t);
+    uint64_t operator()(const kitty::dynamic_truth_table& t);
     uint64_t operator()(std::vector<int> vars);
     uint64_t operator()(std::string);
 
