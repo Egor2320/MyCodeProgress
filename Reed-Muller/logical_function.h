@@ -14,6 +14,7 @@ namespace Reed_Muller {
         int operator()(std::string);
 
         void print();
+        void polynomical();
 
     private:
         //each cell represents the coef * (var_1 & var_2 & ... & var_n), coef is either 0 or 1;
@@ -22,6 +23,12 @@ namespace Reed_Muller {
         struct cell {
             int coef;
             std::vector<int> variables;
+
+            cell() {
+                coef = 0;
+            }
+
+            cell(int c, std::vector<int> v): coef(c), variables(std::move(v)){};
         };
         int num;
         std::vector<cell> func;
