@@ -4,10 +4,10 @@
 int main() {
     Reed_Muller::popcounter p;
 
-    Reed_Muller::logical_function f(4, "1010011011110001");
+    Reed_Muller::logical_function f(3, "10110001");
 
-    for(int i = 0; i < 16; ++i){
-        std::string s = p.to2(i, 4);
+    for(int i = 0; i < 8; ++i){
+        std::string s = p.to2(i, 3);
         std::cout << s << "->" << f(s) << '\n';
     }
 
