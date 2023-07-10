@@ -13,7 +13,6 @@ namespace Reed_Muller {
         int operator()(std::vector<int> vars);
         int operator()(std::string);
 
-        void print();
         void polynomical();
 
     private:
