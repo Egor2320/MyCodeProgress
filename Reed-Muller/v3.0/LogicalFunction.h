@@ -22,7 +22,7 @@ namespace Reed_Muller {
 		
 		static std::vector<Cell> sythesize(const kitty::dynamic_truth_table& t);
 		static uint64_t apply(const std::vector<Cell>& func, const std::string &s);
-    static void polynomical(std::vector<Cell> func);
+    		static void polynomical(std::vector<Cell> func);
 		
 	private:
 		static uint64_t apply_to_vec(const std::vector<Cell>& func, const std::vector<int> v);
